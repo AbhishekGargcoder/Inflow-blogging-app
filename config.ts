@@ -1,0 +1,1 @@
+export const BACKENED_URL = "https://medium-blogging-app.imcoder22.workers.dev";
