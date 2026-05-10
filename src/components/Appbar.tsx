@@ -5,17 +5,14 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { authAtom } from "../store/atom/authAtom.tsx";
 
 
-let setAuthAtom = (value: boolean) => void {
-
-}
-let navigate;
 
 // font-family: "lora"; for create account text 
 export default function Appbar() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    setAuthAtom = useSetRecoilState(authAtom);
-    navigate = useNavigate();
+    const isAuthenticated = useRecoilValue(authAtom);
+    const setAuthAtom = useSetRecoilState(authAtom);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -24,6 +21,14 @@ export default function Appbar() {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    function logout() {
+        // localStorage.setItem("token", "");
+        localStorage.clear();
+        setAuthAtom(false);
+        navigate("/");
+
+    }
 
     return (
         <nav
@@ -102,7 +107,7 @@ export default function Appbar() {
                         <MobileNavLink to="/membership" onClick={() => setIsMobileMenuOpen(false)}>Membership</MobileNavLink>
                         <div className="h-px bg-gray-100" />
 
-                        {useRecoilValue(authAtom) ? <Link
+                        {isAuthenticated ? <Link
                             to="/logout"
                             className="text-sm font-semibold text-gray-900"
                         >
@@ -153,10 +158,3 @@ function MobileNavLink({ to, children, onClick }) {
     );
 }
 
-function logout() {
-    // localStorage.setItem("token", "");
-    localStorage.clear();
-    setAuthAtom(false);
-    navigate("/");
-
-}
