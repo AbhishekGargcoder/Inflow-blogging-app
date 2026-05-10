@@ -107,12 +107,12 @@ export default function Appbar() {
                         <MobileNavLink to="/membership" onClick={() => setIsMobileMenuOpen(false)}>Membership</MobileNavLink>
                         <div className="h-px bg-gray-100" />
 
-                        {isAuthenticated ? <Link
-                            to="/logout"
-                            className="text-sm font-semibold text-gray-900"
+                        {isAuthenticated ? <button
+                            onClick={logout}
+                            className="text-xs font-semibold uppercase tracking-widest text-gray-500 hover:text-gray-900 transition-colors"
                         >
                             Logout
-                        </Link> : <Link
+                        </button> : <Link
                             to="/signin"
                             className="text-sm font-semibold text-gray-900"
                         >
