@@ -87,7 +87,7 @@ export default function CreateBlog() {
                             value={postData.title}
                             onChange={(e) => setPostData((obj) => ({ ...obj, title: e.target.value }))}
                             placeholder="Title"
-                            className="w-full text-5xl md:text-6xl font-display font-semibold text-gray-900 bg-transparent outline-none resize-none placeholder:text-gray-200 leading-tight"
+                            className="w-full text-3xl md:text-4xl font-display font-semibold text-gray-900 bg-transparent outline-none resize-none placeholder:text-gray-200 leading-tight"
                             rows={1}
                         />
                     </div>

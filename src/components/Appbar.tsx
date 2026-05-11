@@ -62,7 +62,7 @@ export default function Appbar() {
                         <Search size={20} strokeWidth={1.5} />
                     </button> */}
                     <div className="h-4 w-px bg-gray-200" />
-                    {useRecoilValue(authAtom) ? (
+                    {isAuthenticated ? (
                         <>
                             <button
                                 onClick={logout}
@@ -107,26 +107,25 @@ export default function Appbar() {
                         <MobileNavLink to="/membership" onClick={() => setIsMobileMenuOpen(false)}>Membership</MobileNavLink>
                         <div className="h-px bg-gray-100" />
 
-                        {isAuthenticated ? <button
+                        {isAuthenticated ? (<><button
                             onClick={logout}
                             className="text-xs font-semibold uppercase tracking-widest text-gray-500 hover:text-gray-900 transition-colors"
                         >
                             Logout
-                        </button> : <Link
-                            to="/signin"
-                            className="text-sm font-semibold text-gray-900"
-                        >
+                        </button>
+                            <Link
+                                to="/publish"
+                                className="w-full py-3 bg-gray-900 text-white text-center text-xs font-semibold uppercase tracking-widest rounded-lg"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                Get Started
+                            </Link></>) : <Link
+                                to="/signin"
+                                className="text-sm font-semibold text-gray-900"
+                            >
                             Sign in
                         </Link>}
 
-
-                        <Link
-                            to="/publish"
-                            className="w-full py-3 bg-gray-900 text-white text-center text-xs font-semibold uppercase tracking-widest rounded-lg"
-                            onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                            Get Started
-                        </Link>
                     </div>
                 </div>
             )}
