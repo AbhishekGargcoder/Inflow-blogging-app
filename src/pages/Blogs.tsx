@@ -3,9 +3,6 @@ import BlogCard from '../components/BlogCard'
 // import Loader from '../components/Loader';
 import { useBlogs } from "../hooks";
 import BlogSkeleton from "../components/BlogSkeleton";
-// import axios from 'axios';
-// import { useState, useEffect } from 'react';
-// import { BACKENED_URL } from '../../config';
 
 export default function Blogs() {
 
