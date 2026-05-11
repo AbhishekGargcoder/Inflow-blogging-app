@@ -34,7 +34,7 @@ export default function Blogs() {
                     {/* Left Side: Blogs List */}
                     <div className="flex-1">
                         <div className="mb-12">
-                            <h1 className="font-display text-5xl font-semibold text-gray-900 mb-4">Latest Stories</h1>
+                            <h1 className="font-display text-3xl md:text-5xl font-semibold text-gray-900 mb-4">Latest Stories</h1>
                             <p className="text-gray-500 font-light tracking-wide">Refined insights from the world's most curious minds.</p>
                         </div>
 
