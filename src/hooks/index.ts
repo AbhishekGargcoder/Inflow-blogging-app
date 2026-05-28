@@ -22,9 +22,9 @@ export function useBlogs() {
 
         try {
             console.log("try m hu");
-            axios.get(`${BACKENED_URL}/api/v1/blog/bulk`, {
+            axios.get(`${BACKENED_URL}/api/v1/blog/bulk?limit=5&offset=1`, {
                 headers: {
-                    Authorization: localStorage.getItem("token")
+                    Authorization: "Bearer " + localStorage.getItem("token")
                 }
             }).then(response => {
                 setBlogs(response.data.blogs);
@@ -89,7 +89,7 @@ export function useBlog({ id }: { id: string }) {
 
         axios.get(`${BACKENED_URL}/api/v1/blog/${id}`, {
             headers: {
-                Authorization: localStorage.getItem("token")
+                Authorization: `Bearer ${localStorage.getItem("token")}`
             }
         }).then(response => {
             blogCache[id] = response.data.blog; // save to cache 

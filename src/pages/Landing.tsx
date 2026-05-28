@@ -1,12 +1,29 @@
 import Appbar from "../components/Appbar";
 import { ArrowRight, TrendingUp, Bookmark, Share2, PenLine } from "lucide-react";
 import { Link } from "react-router-dom";
-// import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { authAtom } from "../store/atom/authAtom.tsx";
+
 // import axios from "axios";
 // import { BACKENED_URL } from "../../config";
 
 
 export default function Landing() {
+
+    const navigate = useNavigate();
+    const setAuthAtom = useSetRecoilState(authAtom);
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/signin');
+            return;
+        }
+        setAuthAtom(true);
+        // fetchBlogs(token);
+    }, [navigate]);
+
 
     const featuredStories = [
         {

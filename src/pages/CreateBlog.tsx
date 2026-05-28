@@ -46,7 +46,7 @@ export default function CreateBlog() {
                 content: postData.content
             }, {
                 headers: {
-                    Authorization: localStorage.getItem("token")
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             });
             navigate(`/blog/${response.data.blog.id}`);

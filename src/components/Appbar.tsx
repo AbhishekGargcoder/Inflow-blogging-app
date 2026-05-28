@@ -13,8 +13,14 @@ export default function Appbar() {
     const isAuthenticated = useRecoilValue(authAtom);
     const setAuthAtom = useSetRecoilState(authAtom);
     const navigate = useNavigate();
-
+    console.log("isAuth  value : ", isAuthenticated);
     useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/signin');
+            return;
+        }
+        setAuthAtom(true);
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 20);
         };
@@ -49,12 +55,12 @@ export default function Appbar() {
                     </span>
                 </Link>
 
-                {/* Desktop Navigation */}
+                {/* Desktop Navigation
                 <div className="hidden md:flex items-center gap-10">
                     <NavLink to="/stories">Stories</NavLink>
                     <NavLink to="/writers">Writers</NavLink>
                     <NavLink to="/membership">Membership</NavLink>
-                </div>
+                </div> */}
 
                 {/* Right Actions */}
                 <div className="hidden md:flex items-center gap-6">
@@ -133,17 +139,17 @@ export default function Appbar() {
     );
 }
 
-function NavLink({ to, children }) {
-    return (
-        <Link
-            to={to}
-            className="text-xs font-semibold uppercase tracking-widest text-gray-500 hover:text-gray-900 transition-colors relative group"
-        >
-            {children}
-            <span className="absolute -bottom-1 left-0 w-0 h-px bg-gray-900 transition-all group-hover:w-full" />
-        </Link>
-    );
-}
+// function NavLink({ to, children }) {
+//     return (
+//         <Link
+//             to={to}
+//             className="text-xs font-semibold uppercase tracking-widest text-gray-500 hover:text-gray-900 transition-colors relative group"
+//         >
+//             {children}
+//             <span className="absolute -bottom-1 left-0 w-0 h-px bg-gray-900 transition-all group-hover:w-full" />
+//         </Link>
+//     );
+// }
 
 function MobileNavLink({ to, children, onClick }) {
     return (

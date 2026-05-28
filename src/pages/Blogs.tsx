@@ -3,10 +3,44 @@ import BlogCard from '../components/BlogCard'
 // import Loader from '../components/Loader';
 import { useBlogs } from "../hooks";
 import BlogSkeleton from "../components/BlogSkeleton";
+import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
+
 
 export default function Blogs() {
 
     const { loading, blogs } = useBlogs();
+    let limit = 5;
+    const [offset, setOffset] = useState(1);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/signin');
+            return;
+        }
+        // fetchBlogs(token);
+    }, [navigate]);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (
+                window.innerHeight + window.scrollY >=
+                document.body.offsetHeight
+            ) {
+
+                // hit backend api to fetch more blogs and append to the existing list of blogs in the state
+                setOffset(prevOffset => prevOffset + 5);
+                console.log("Reached bottom");
+
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     if (loading) {
         return (  // LOADER ...

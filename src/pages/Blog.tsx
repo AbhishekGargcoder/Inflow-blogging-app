@@ -2,6 +2,9 @@ import Appbar from "../components/Appbar";
 import { Link, useParams } from "react-router-dom";
 import Loader from "../components/Loader";
 import { ArrowLeft } from "lucide-react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 // import { blogAtom } from '../store/atoms/blog'
 import { useBlog } from "../hooks";
 // import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -10,6 +13,16 @@ export default function Blog() {
     const { id } = useParams();
 
     const { loading, blog } = useBlog({ id });
+    const navigate = useNavigate();
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/signin');
+            return;
+        }
+        // fetchBlogs(token);
+    }, [navigate]);
+
 
     if (loading) {
         return (
@@ -19,6 +32,12 @@ export default function Blog() {
             </div>)
     }
     console.log(blog);
+
+
+
+
+
+
     return (
         <div className="min-h-screen bg-white font-sans">
             <link

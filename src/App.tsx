@@ -11,36 +11,36 @@ import { authAtom } from "./store/atom/authAtom.tsx";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BACKENED_URL } from '../config';
+import VerifyEmail from './pages/VerifyEmail.tsx';
 
 function App() {
   const setAuthAtom = useSetRecoilState(authAtom);
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      const token = localStorage.getItem("token");
+  // useEffect(() => {
+  //   const checkAuth = async () => {
+  //     const token = localStorage.getItem("token");
 
-      if (!token) {
-        setIsLoggedIn(false);
-        return;
-      }
+  //     if (!token) {
+  //       setIsLoggedIn(false);
+  //       return;
+  //     }
 
-      axios.post(`${BACKENED_URL}/api/v1/user/signin`, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `${token}`
-        }
-      }).then(() => {
-        setAuthAtom(true);
-        setIsLoggedIn(true);
-      }).catch(() => {
-        setIsLoggedIn(false);
-      })
-    }
-    checkAuth();
-  }, []);
+  //     axios.post(`${BACKENED_URL}/api/v1/user/signin`, {
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         Authorization: `${token}`
+  //       }
+  //     }).then(() => {
+  //       setAuthAtom(true);
+  //       setIsLoggedIn(true);
+  //     }).catch(() => {
+  //       setIsLoggedIn(false);
+  //     })
+  //   }
+  //   checkAuth();
+  // }, []);
 
   return (
     <>
@@ -52,6 +52,7 @@ function App() {
           <Route path="/blog/:id" element={<Blog />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path='/publish' element={<CreateBlog />} />
+          <Route path="/verify-email" element={<VerifyEmail />} />
         </Routes>
       </BrowserRouter>
     </>
